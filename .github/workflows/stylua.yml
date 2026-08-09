@@ -1,7 +1,6 @@
 name: Stylua
 on:
   - push
-  - pull_request
 jobs:
   stylua:
     runs-on: ubuntu-24.04
