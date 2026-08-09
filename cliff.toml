@@ -19,7 +19,8 @@ body = """
 {% for group, commits in commits | group_by(attribute="group") %}
     ### {{ group | upper_first }}
     {%- for commit in commits %}
-        - {{ commit.message | split(pat="\n") | first | upper_first | trim }}\
+        - {% if commit.scope %}_({{ commit.scope }})_ {% endif %}\
+            {{ commit.message | split(pat="\n") | first | upper_first | trim }}\
             {% if commit.remote.username %} by @{{ commit.remote.username }}{%- endif -%}
             {% if commit.remote.pr_number %} in \
             [#{{ commit.remote.pr_number }}]({{ self::remote_url() }}/pull/{{ commit.remote.pr_number }}) \
@@ -51,6 +52,9 @@ footer = """
         {% if release.previous.version -%}
             [{{ release.version | trim_start_matches(pat="v") }}]: \
                 {{ self::remote_url() }}/compare/{{ release.previous.version }}...{{ release.version }}
+        {% else -%}
+            [{{ release.version | trim_start_matches(pat="v") }}]: \
+                {{ self::remote_url() }}/tree/{{ release.version }}
         {% endif -%}
     {% elif release.version.previous -%}
         [unreleased]: {{ self::remote_url() }}/compare/{{ release.previous.version }}...HEAD
