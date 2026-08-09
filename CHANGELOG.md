@@ -9,9 +9,12 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### <!-- 0 -->Features
 - Initial barebones version by @f4z3r
 
+### <!-- 3 -->Documentation
+- Add nice version of readme by @f4z3r
+
 ### New Contributors
-* @github-actions[bot] made their first contribution
 * @f4z3r made their first contribution
+* @github-actions[bot] made their first contribution
 
 [unreleased]: https://github.com/f4z3r/yankcraft.nvim
 
