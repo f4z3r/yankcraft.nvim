@@ -7,6 +7,7 @@ function M.dedent(lines)
   local min_indent = nil
   for _, line in ipairs(lines) do
     if line:match("%S") then
+      -- TODO: f4z3r - fix mixed indents between tabs and spaces.
       local indent = #(line:match("^%s*"))
       if min_indent == nil or indent < min_indent then
         min_indent = indent

@@ -1,4 +1,4 @@
-local markdown = require("yankcraft.fences.markdown")
+local markdown = require("yankcraft.formatters.markdown")
 
 local M = {}
 
@@ -6,14 +6,16 @@ local M = {}
 ---@field register string Register to yank into (default: system clipboard "+").
 ---@field path_style "auto"|"relative"|"absolute" How to render the file path.
 ---@field notify boolean Whether to notify on successful yank.
----@field fence fun(ctx:YankCraft.Context):string A function that allows to customize the fence to use.
+---@field dedent boolean Whether to remove the common indent from the code contents.
+---@field formatter fun(ctx:YankCraft.Context):string A function that allows to customize the formatter to use.
 
 ---@type YankCraft.Config
 M.defaults = {
   register = "+",
   path_style = "auto",
   notify = true,
-  fence = markdown,
+  dedent = true,
+  formatter = markdown,
 }
 
 ---@type YankCraft.Config

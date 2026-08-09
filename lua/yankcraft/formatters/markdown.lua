@@ -1,5 +1,3 @@
-local utils = require("yankcraft.fences.utils")
-
 ---Return a fence string long enough to safely wrap the given lines.
 ---Markdown requires the fence to be longer than any backtick run inside the
 ---content, with a minimum of three backticks.
@@ -21,10 +19,12 @@ end
 ---@param ctx YankCraft.Context
 ---@return string
 return function(ctx)
+  if (ctx.selection_type == "char" or ctx.selection_type == "block") and (ctx.start_line == ctx.end_line) then
+    return "`" .. ctx.lines[1] .. "`"
+  end
   local lines = ctx.lines
-  lines = utils.dedent(lines)
   local fence = build_fence(lines)
-  local out = { fence .. (ctx.lang ~= "" and ctx.lang or "") }
+  local out = { fence .. (ctx.filetype ~= "" and ctx.filetype or "") }
   vim.list_extend(out, lines)
   table.insert(out, fence)
 

@@ -12,7 +12,7 @@
 [Features](#features) |
 [Installation](#installation) |
 [Usage](#usage) |
-[Configuration](#configuration) |
+[Configuration](#configuration)
 
 <hr />
 </div>
@@ -79,14 +79,14 @@ range is appended:
 The additional options can be used to override global options.
 
 The `content` function will copy the selected lines (in visual mode) or the current line (in normal
-mode) and fence the text according to your configuration (by default a Markdown fence):
+mode) and fence the text according to your configuration (by default a Markdown formatter):
 
 ````
 ```lua
 function M.content(opts)
   opts = vim.tbl_deep_extend("force", vim.deepcopy(config.options), opts or {})
   local ctx = context.from_selection()
-  local text = opts.fence(ctx)
+  local text = opts.formatter(ctx)
   vim.fn.setreg(opts.register, text)
   if config.options.notify then
     local range = get_range(ctx)
@@ -114,14 +114,14 @@ end, {
 })
 
 vim.keymap.set({ "n", "x" }, "<leader>yc", require("yankcraft").content, {
-  desc = "Yank content in Markdown fences"
+  desc = "Yank content in Markdown format"
 })
 
 vim.keymap.set({ "n", "x" }, "<leader>yn", function()
-  local norg = require("yankcraft.fences.norg")
-  require("yankcraft").content({fence = norg})
+  local norg = require("yankcraft.formatters.norg")
+  require("yankcraft").content({formatter = norg})
 end, {
-  desc = "Yank content in Norg fences"
+  desc = "Yank content in Norg format"
 })
 ```
 
@@ -134,13 +134,14 @@ require("yankcraft").setup({
   register = "+",       -- register to yank into (system clipboard)
   path_style = "auto",  -- "auto" (git root -> cwd) | "relative" (cwd) | "absolute"
   notify = true,        -- notify on successful yank
-  fence = nil,          -- your custom default fence function, markdown by default
+  dedent = true,        -- whether to remove the common indents on code content copies
+  formatter = nil,      -- your custom default formatter function, markdown by default
 })
 ```
 
-### Building a Custom Fence
+### Building a Custom Formatter
 
-You can build a custom fence if it is not provided by the project (or feel free to open a PR). This
+You can build a custom formatter if it is not provided by the project (or feel free to open a PR). This
 can be done by providing a function with the following format:
 
 ```lua
@@ -152,16 +153,24 @@ Where `YankCraft.Context` provides the following fields:
 ```lua
 ---@class YankCraft.Context
 ---@field path string Display path of the buffer.
----@field lang string Filetype used as the code-fence language ("" when unknown).
----@field start_line integer? 1-based start line.
----@field end_line integer? 1-based end line.
+---@field filetype string Filetype used as the code-fence language ("" when unknown).
+---@field selection_type YankCraft.SelectionType The type of selection that was performed.
+---@field start_line integer 1-based start line.
+---@field end_line integer 1-based end line.
+---@field start_col integer? 1-based start column (if visual selection).
+---@field end_col integer? 1-based end column (if visual selection).
 ---@field lines string[] Collected buffer lines.
+
+---@alias YankCraft.SelectionType
+---| "char"
+---| "line"
+---| "block"
 ```
 
-See [`lua/yankcraft/fences/norg.lua`](./lua/yankcraft/fences/norg.lua) for an example implementation
-of a fence that dedents the lines of text and adds a `@code <lang>` start and an `@end` end fence.
+See [`lua/yankcraft/formatters/norg.lua`](./lua/yankcraft/formatters/norg.lua) for an example implementation
+of a formatter that dedents the lines of text and adds a `@code <lang>` start and an `@end` end fence.
 
-Such a function can then be given either as a default fence in the configuration, or when calling
+Such a function can then be given either as a default formatter in the configuration, or when calling
 the `content` function directly (see [Suggested Keymaps](#suggested-keymaps) for an example).
 
 ## License
