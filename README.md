@@ -18,8 +18,11 @@
 </div>
 
 > [!NOTE]
-> This is essentially a fork from [context-yank.nvim](https://github.com/ymtdzzz/context-yank.nvim)
-> with some additional features that I need.
+> Credits: this is started a fork from
+> [context-yank.nvim](https://github.com/ymtdzzz/context-yank.nvim) as it provided the baseline for
+> clipboard handling and similar features to what I wanted to achieve. The goal of this repository
+> is diverging from context-yank.nvim though. It strives to provide different formatting options for
+> various target systems.
 
 ## Features
 
