@@ -6,8 +6,8 @@ local M = {}
 ---@class YankCraft.Context
 ---@field path string Display path of the buffer.
 ---@field lang string Filetype used as the code-fence language ("" when unknown).
----@field start_line integer? 1-based start line (nil for a whole file).
----@field end_line integer? 1-based end line (nil for a whole file).
+---@field start_line integer? 1-based start line.
+---@field end_line integer? 1-based end line.
 ---@field lines string[] Collected buffer lines.
 
 ---Resolve the display path for a buffer.
