@@ -35,6 +35,16 @@ Some of the ones that I like the most:
 - Copy a code block and wrap it in [Norg](https://github.com/nvim-neorg/norg-specs) fences to paste
   in my [Neorg](https://github.com/nvim-neorg/neorg) setup.
 
+Here is a short example copying a file reference including line range to the clipboard, and an
+example copying a code block into markdown format:
+
+![Example of features](./assets/example.gif)
+
+This plugin is best used when combined with a yank ring such as
+[`yanky.nvim`](https://github.com/gbprod/yanky.nvim). Additionally, I recommend using
+[`gitlinker.nvim`](https://github.com/ruifm/gitlinker.nvim) if you want to share links to code
+hosted somewhere.
+
 ## Installation
 
 Install via your favourite package manager:
@@ -61,6 +71,24 @@ use 'f4z3r/yankcraft.nvim'
   priority = 1000,
   opts = {},
 },
+```
+
+[Nix package](https://search.nixos.org/packages?channel=unstable&show=vimPlugins.yankcraft-nvim&from=0&size=50&sort=relevance&type=packages&query=yankcraft-nvim)
+with [home-manager](https://github.com/nix-community/home-manager)
+
+```nix
+programs.neovim = {
+  enable = true;
+  # ...
+  plugins = with pkgs.vimPlugins; [
+    # ...
+    {
+      type = "lua";
+      plugin = yankcraft-nvim;
+      config = ''require('yankcraft').setup()'';
+    }
+  ];
+};
 ```
 
 ## Usage
