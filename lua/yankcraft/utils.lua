@@ -24,4 +24,18 @@ function M.dedent(lines)
   return result
 end
 
+---Return the line range in the format (LXX-LYY) provided by a context.
+---@param ctx YankCraft.Context
+---@return string
+function M.get_line_range(ctx)
+  local range = "(L"
+  if ctx.start_line ~= ctx.end_line then
+    range = range .. ctx.start_line .. "-L" .. ctx.end_line
+  else
+    range = range .. ctx.start_line
+  end
+  range = range .. ")"
+  return range
+end
+
 return M

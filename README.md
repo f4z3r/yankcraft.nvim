@@ -40,6 +40,17 @@ example copying a code block into markdown format:
 
 ![Example of features](./assets/example.gif)
 
+Currently, the following formatters are directly supported by this plugin:
+
+- Markdown,
+- filepath,
+- filepath with a line range,
+- Jira,
+- Confluence Wiki,
+- Norg
+
+I will add more in the future. You you want another one, simply open an issue or a PR.
+
 This plugin is best used when combined with a yank ring such as
 [`yanky.nvim`](https://github.com/gbprod/yanky.nvim). Additionally, I recommend using
 [`gitlinker.nvim`](https://github.com/ruifm/gitlinker.nvim) if you want to share links to code
@@ -93,24 +104,29 @@ programs.neovim = {
 
 ## Usage
 
-The plugin does not create any keymaps automatically. It essentially exposes two functions:
+The plugin does not create any keymaps automatically. It essentially exposes a single function:
 
 ```lua
-filepath(with_range?: boolean, opts?: YankCraft.Config)
-content(opts?: YankCraft.Config)
+copy(opts?: YankCraft.Config)
 ```
 
-The `filepath` function will copy the filepath to the clipboard. If `with_range` is provided, a line
-range is appended:
+You can pass various formatters using the options. These are identical to the configuration used
+in the `setup` function. Typically you might want to provide a formatter. For instance, to get
+the filepath with a line range:
+
+```lua
+local fmtr = require("yankcraft.formatters.filepath_with_line_range")
+require("yankcraft").copy({formatter = fmtr})
+```
+
+This will result in the following:
 
 ```
-`lua/yankcraft/init.lua` (L39)
+`lua/yankcraft/init.lua` (L39-L42)
 ```
 
-The additional options can be used to override global options.
-
-The `content` function will copy the selected lines (in visual mode) or the current line (in normal
-mode) and fence the text according to your configuration (by default a Markdown formatter):
+By default, the configured default formatter from the `setup` function will be used, which formats
+the code block as Markdown:
 
 ````
 ```lua
@@ -133,27 +149,35 @@ end
 ```lua
 local yankcraft = require("yankcraft")
 
-vim.keymap.set("n", "<leader>yf", require("yankcraft").filepath, {
+vim.keymap.set({ "n", "x" }, "<leader>yf", function()
+  local formatter = require("yankcraft.formatters.filepath")
+  require("yankcraft").copy({formatter = formatter})
+  vim.cmd("normal! \27") -- return to normal mode, if you desire
+end, {
   desc = "Yank filepath"
 })
 
 vim.keymap.set({ "n", "x" }, "<leader>yl", function()
-  require("yankcraft").filepath(true)
-  vim.cmd("normal! \27") -- return to normal mode, if you desire
+  local formatter = require("yankcraft.formatters.filepath_with_line_range")
+  require("yankcraft").copy({formatter = formatter})
 end, {
   desc = "Yank filepath and line number(s)"
 })
 
-vim.keymap.set({ "n", "x" }, "<leader>yc", require("yankcraft").content, {
+-- this assumes you have not setup another default formatter via `setup`
+vim.keymap.set({ "n", "x" }, "<leader>ym", require("yankcraft").copy, {
   desc = "Yank content in Markdown format"
 })
 
 vim.keymap.set({ "n", "x" }, "<leader>yn", function()
   local norg = require("yankcraft.formatters.norg")
-  require("yankcraft").content({formatter = norg})
+  require("yankcraft").copy({formatter = norg})
 end, {
   desc = "Yank content in Norg format"
 })
+
+-- You can also define your custom formatter and pass it directly here.
+-- See "Building a Custom Formatter"
 ```
 
 ## Configuration
@@ -202,7 +226,7 @@ See [`lua/yankcraft/formatters/norg.lua`](./lua/yankcraft/formatters/norg.lua) f
 of a formatter that dedents the lines of text and adds a `@code <lang>` start and an `@end` end fence.
 
 Such a function can then be given either as a default formatter in the configuration, or when calling
-the `content` function directly (see [Suggested Keymaps](#suggested-keymaps) for an example).
+the `copy` function directly (see [Suggested Keymaps](#suggested-keymaps) for an example).
 
 ## License
 
