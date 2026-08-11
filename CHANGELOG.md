@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### <!-- 3 -->Documentation
+- _(README)_ Fix lazy installation instructions by @f4z3r
+
 ## [0.2.0] - 2026-08-11
 
 ### <!-- 0 -->Features
@@ -36,6 +41,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 * @github-actions[bot] made their first contribution
 * @f4z3r made their first contribution
 
+[unreleased]: https://github.com/f4z3r/yankcraft.nvim
 [0.2.0]: https://github.com/f4z3r/yankcraft.nvim/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/f4z3r/yankcraft.nvim/tree/v0.1.0
 
