@@ -234,6 +234,14 @@ of a formatter that dedents the lines of text and adds a `@code <lang>` start an
 Such a function can then be given either as a default formatter in the configuration, or when calling
 the `copy` function directly (see [Suggested Keymaps](#suggested-keymaps) for an example).
 
+## Testing
+
+Use the following command to run the tests:
+
+```bash
+make test
+```
+
 ## License
 
 MIT

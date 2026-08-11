@@ -11,7 +11,6 @@ return function(ctx)
   end
   local out = { header, "" }
   vim.list_extend(out, lines)
-  table.insert(out, "#+end_src")
 
   return table.concat(out, "\n")
 end

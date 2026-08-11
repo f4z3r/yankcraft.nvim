@@ -1,2 +1,4 @@
+std = "vim"
+exclude = ["deps/**/*.lua"]
 [lints]
 undefined_variable = "allow"
