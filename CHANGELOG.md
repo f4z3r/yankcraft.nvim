@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### <!-- 0 -->Features
 - _(formatters)_ Add new formatters for Jira and Confluence Wiki. by @f4z3r
 - _(api)_ Reduce the API to a single copy function for simpler use by @f4z3r in [#4](https://github.com/f4z3r/yankcraft.nvim/pull/4)
+- _(formatters)_ Add formatters for asciidoc, latex, org mode, and rst by @f4z3r in [#5](https://github.com/f4z3r/yankcraft.nvim/pull/5)
 
 ### <!-- 3 -->Documentation
 - _(README)_ Improve credits not for context-yank.nvim by @f4z3r in [#1](https://github.com/f4z3r/yankcraft.nvim/pull/1)
