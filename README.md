@@ -43,11 +43,17 @@ example copying a code block into markdown format:
 Currently, the following formatters are directly supported by this plugin:
 
 - Markdown,
+- AsciiDoc,
+- reStructuredText,
 - filepath,
 - filepath with a line range,
 - Jira,
 - Confluence Wiki,
-- Norg
+- Org Mode,
+- LaTex (listings),
+- LaTex (minted),
+- Norg,
+- plain text
 
 I will add more in the future. You you want another one, simply open an issue or a PR.
 
