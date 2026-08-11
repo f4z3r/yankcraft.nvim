@@ -15,9 +15,13 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - _(README)_ Improve credits not for context-yank.nvim by @f4z3r in [#1](https://github.com/f4z3r/yankcraft.nvim/pull/1)
 - _(README)_ Add gif of features and notes on other useful plugins by @f4z3r in [#3](https://github.com/f4z3r/yankcraft.nvim/pull/3)
 
+### <!-- 6 -->Testing
+- _(formatters)_ Add formatter tests by @f4z3r
+
 ### <!-- 7 -->Miscellaneous Tasks
 - _(git-cliff)_ Fix issue with version linking on initial version by @f4z3r
 - _(stylua)_ Fix double trigger on pull requests by @f4z3r in [#2](https://github.com/f4z3r/yankcraft.nvim/pull/2)
+- Add pipeline to test code on push by @f4z3r in [#6](https://github.com/f4z3r/yankcraft.nvim/pull/6)
 
 ## [0.1.0] - 2026-08-09
 
