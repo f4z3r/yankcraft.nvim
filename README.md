@@ -84,8 +84,6 @@ use 'f4z3r/yankcraft.nvim'
 {
   'f4z3r/yankcraft.nvim',
   name = 'yankcraft',
-  lazy = false,
-  priority = 1000,
   opts = {},
 },
 ```
