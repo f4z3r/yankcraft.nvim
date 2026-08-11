@@ -1,0 +1,32 @@
+name: Lint and test
+on:
+  - push
+jobs:
+  stylua:
+    name: Lint
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
+      - name: StyLua
+        uses: JohnnyMorganz/stylua-action@76fd70c03e6340ceaf673366712db9b20560b402 # v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          version: 0.20.0
+          args: --check .
+  test:
+    name: Test (${{ matrix.neovim }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        neovim: [v0.8.3, stable, nightly]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Install Neovim
+        uses: rhysd/action-setup-vim@febef33995d6649302e9d88dda81e071b68f16a7 # v1.6.1
+        with:
+          neovim: true
+          version: ${{ matrix.neovim }}
+      - name: Run tests
+        run: make test
