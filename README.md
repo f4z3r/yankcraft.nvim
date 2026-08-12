@@ -55,6 +55,8 @@ Currently, the following formatters are directly supported by this plugin:
 - Norg,
 - plain text
 
+See [`docs/formatters.md`](./docs/formatters.md) for a sample output of the formatters.
+
 I will add more in the future. You you want another one, simply open an issue or a PR.
 
 This plugin is best used when combined with a yank ring such as
@@ -147,6 +149,8 @@ function M.content(opts)
 end
 ```
 ````
+
+See [`docs/formatters.md`](./docs/formatters.md) for the sample output of all supported formatters.
 
 ### Suggested Keymaps
 
