@@ -10,6 +10,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - _(README)_ Fix lazy installation instructions by @f4z3r
 - _(formatters)_ Add sample output documentation of support formatters by @f4z3r in [#7](https://github.com/f4z3r/yankcraft.nvim/pull/7)
 
+### New Contributors
+* @renovate[bot] made their first contribution in [#12](https://github.com/f4z3r/yankcraft.nvim/pull/12)
+
 ## [0.2.0] - 2026-08-11
 
 ### <!-- 0 -->Features
